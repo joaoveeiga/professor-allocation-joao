@@ -4,6 +4,7 @@ import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -27,12 +28,16 @@ public class Department {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@ToString.Exclude
+	// Local errado
+	//@ToString.Exclude
 	private Long id;
 
 	@Column(name = "name", unique = true, nullable = false)
 	private String name;
 
+	// Local correto. O motivo está no final do slide
+	@ToString.Exclude
+    @EqualsAndHashCode.Exclude
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@OneToMany(mappedBy = "department")
 	private List<Professor> professors;

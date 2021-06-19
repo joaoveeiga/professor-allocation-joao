@@ -12,6 +12,7 @@ import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -27,12 +28,16 @@ public class Course {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@ToString.Exclude
+	// Local errado
+	//@ToString.Exclude
 	private Long id;
 
 	@Column(name = "name", nullable = false, unique = true)
 	private String name;
 
+	// Local correto. O motivo está no final do slide
+	@ToString.Exclude
+    @EqualsAndHashCode.Exclude
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@OneToMany(mappedBy = "course")
 	private List<Allocation> allocations;
