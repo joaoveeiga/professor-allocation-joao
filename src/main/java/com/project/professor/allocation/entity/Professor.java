@@ -1,79 +1,48 @@
 package com.project.professor.allocation.entity;
 
+import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-public class Professor 
-{
-	@Id
-	private Long id;
-	private String name;
-	private String cpf;
-	private Department department;
-	
-	public Professor ()
-	{
-		super();
-	}
-	
-	public Professor (Long id, String name, String cpfDoProfessor, Department department)
-	{
-		super();
-		this.id = id;
-		this.name = name;
-		this.cpf = cpfDoProfessor;
-		this.department = department;
-	}
-	
-	public String getCpf ()
-	{
-		return this.cpf;
-	}
-	
-	public void setCpf(String cpf)
-	{
-		this.cpf = cpf;
-	}
-	
-	/*public void setCpf(long cpf)
-	{
-		String cpfString;
-		cpfString = String.valueOf(cpf);
-		while (cpfString.length() < 11)
-		{
-			cpfString = "0"+cpfString;
-		}
-		this.setCpf(cpfString);
-	}*/
-	
-	public String getName ()
-	{
-		return this.name;
-	}
-	
-	public void setName (String name)
-	{
-		this.name = name;
-	}
-	
-	public Department getDepartment ()
-	{
-		return this.department;
-	}
-	
-	public void setDepartment (Department department)
-	{
-		this.department = department;
-	}
-	
-	public Long getId() 
-	{
-		return id;
-	}
+@Table(name = "professor")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Professor {
 
-	public void setId(Long id) 
-	{
-		this.id = id;
-	}
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@ToString.Exclude
+	private Long id;
+
+	@Column(name = "name", nullable = false)
+	private String name;
+
+	@Column(name = "cpf", unique = true, nullable = false)
+	private String cpf;
+
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "department_id", nullable = false)
+	private Department department;
+
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@OneToMany(mappedBy = "professor")
+	private List<Allocation> allocations;
 }
