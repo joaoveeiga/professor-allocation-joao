@@ -11,5 +11,5 @@ import com.project.professor.allocation.entity.Course;
 @Repository
 public interface CourseRepository extends JpaRepository<Course, Long> 
 {
-	List<Course> findByNameContaningIgnoreCase(String partOfCourseName);
+	List<Course> findByNameContainingIgnoreCase(String partOfCourseName);
 }
