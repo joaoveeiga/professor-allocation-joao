@@ -28,14 +28,11 @@ public class Course {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	// Local errado
-	//@ToString.Exclude
 	private Long id;
 
 	@Column(name = "name", nullable = false, unique = true)
 	private String name;
 
-	// Local correto. O motivo está no final do slide
 	@ToString.Exclude
     @EqualsAndHashCode.Exclude
 	@OnDelete(action = OnDeleteAction.CASCADE)

@@ -30,8 +30,6 @@ public class Professor {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	// Local errado
-	//@ToString.Exclude
 	private Long id;
 
 	@Column(name = "name", nullable = false)
@@ -44,7 +42,6 @@ public class Professor {
 	@JoinColumn(name = "department_id", nullable = false)
 	private Department department;
 
-	// Local correto. O motivo está no final do slide
 	@ToString.Exclude
     @EqualsAndHashCode.Exclude
 	@OnDelete(action = OnDeleteAction.CASCADE)

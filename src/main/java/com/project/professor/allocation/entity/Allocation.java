@@ -29,8 +29,6 @@ public class Allocation {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	// Local errado
-	//@ToString.Exclude
 	private Long id;
 
 	@Enumerated(EnumType.STRING)

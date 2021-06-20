@@ -28,14 +28,11 @@ public class Department {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	// Local errado
-	//@ToString.Exclude
 	private Long id;
 
 	@Column(name = "name", unique = true, nullable = false)
 	private String name;
 
-	// Local correto. O motivo está no final do slide
 	@ToString.Exclude
     @EqualsAndHashCode.Exclude
 	@OnDelete(action = OnDeleteAction.CASCADE)
