@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.TestPropertySource;
 
+import com.project.professor.allocation.entity.Department;
 import com.project.professor.allocation.entity.Professor;
 
 @DataJpaTest
@@ -68,6 +69,24 @@ public class ProfessorRepositoryTest {
 		Professor professor = professorRepository.findByCpf(cpf).orElse(null);
 		
 		//Print
+		System.out.println(professor);
+	}
+	
+	@Test
+	void create_save()
+	{
+		//Arrange
+		Department department = new Department();
+		department.setId(6L);
+		Professor professor = new Professor ();
+		professor.setName("ProfE");
+		professor.setCpf("5");
+		professor.setDepartment(department);
+		
+		//Act
+		professor = professorRepository.save(professor);
+		
+		//print
 		System.out.println(professor);
 	}
 }

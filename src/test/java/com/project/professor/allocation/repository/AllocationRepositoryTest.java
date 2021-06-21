@@ -2,7 +2,7 @@ package com.project.professor.allocation.repository;
 
 import java.sql.Time;
 import java.time.DayOfWeek;
-import java.time.DayOfWeek;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -14,6 +14,8 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.TestPropertySource;
 
 import com.project.professor.allocation.entity.Allocation;
+import com.project.professor.allocation.entity.Course;
+import com.project.professor.allocation.entity.Professor;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
@@ -23,6 +25,12 @@ public class AllocationRepositoryTest
 {
 	@Autowired
 	private AllocationRepository allocationRepository;
+	
+	@Autowired
+	private CourseRepository courseRepository;
+	
+	@Autowired
+	private ProfessorRepository professorRepository;
 	
 	@Test
 	void findAll()
@@ -114,5 +122,27 @@ public class AllocationRepositoryTest
 		
 		//print
 		System.out.println(allocations);
+	}
+	
+	@Test
+	void create_save()
+	{
+		//arrange
+		Allocation allocation = new Allocation();
+		Professor professor = professorRepository.findByCpf("1").orElse(null);
+		Course course = courseRepository.findById(3L).orElse(null);
+		allocation.setCourse(course);
+		allocation.setDayOfWeek(DayOfWeek.FRIDAY);
+		allocation.setProfessor(professor);
+		Date endHour = new Date (79200000L);
+		allocation.setEndHour(endHour);
+		Date startHour = new Date (68400000L);
+		allocation.setStartHour(startHour);
+		
+		//act
+		allocation = allocationRepository.save(allocation);
+		
+		//print
+		System.out.println(allocation);
 	}
 }

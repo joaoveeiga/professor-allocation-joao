@@ -56,4 +56,19 @@ public class DepartmentRepositoryTest
 		//print
 		System.out.println(department);
 	}
+	
+	@Test
+	void save_create()
+	{
+		//Arrange
+		Department department = new Department();
+		department.setId(null);
+		department.setName("Departamento A");
+		
+		//act
+		department = departmentRepository.save(department);
+		
+		//print
+		System.out.println(department);
+	}
 }

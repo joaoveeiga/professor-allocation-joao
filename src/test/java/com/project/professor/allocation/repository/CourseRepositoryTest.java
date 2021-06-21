@@ -56,4 +56,19 @@ public class CourseRepositoryTest
 		//print
 		System.out.println(courses);
 	}
+	
+	@Test
+	void create_save()
+	{
+		//Arrange
+		Course course = new Course();
+		course.setName("Recode");
+		
+		//act
+		course = courseRepository.save(course);
+		
+		//print
+		System.out.println(course);
+		
+	}
 }
