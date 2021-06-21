@@ -22,6 +22,9 @@ public class ProfessorRepositoryTest {
 	@Autowired
 	private ProfessorRepository professorRepository;
 	
+	@Autowired
+	private DepartmentRepository departmentRepository;
+	
 	@Test
 	public void findAll ()
 	{
@@ -88,5 +91,28 @@ public class ProfessorRepositoryTest {
 		
 		//print
 		System.out.println(professor);
+	}
+	
+	@Test
+	void update_save()
+	{
+		//Arrange
+		Professor professor = new Professor();
+		professor.setId(2L);
+		professor.setCpf("32");
+		professor.setName("Tiago Santos");
+		professor.setDepartment (departmentRepository.findById(4L).orElse(null));
+		
+		//act
+		if(!professorRepository.findById(professor.getId()).orElse(null).equals(null))
+		{
+			professorRepository.findById(professor.getId()).orElse(null).setCpf(professor.getCpf());
+			professorRepository.findById(professor.getId()).orElse(null).setName(professor.getName());
+			professorRepository.findById(professor.getId()).orElse(null).setDepartment(departmentRepository.findById(4L).orElse(null));
+		}
+		
+		//print
+		System.out.println("Nome: " + professorRepository.findById(2L).orElse(null).getName());
+		
 	}
 }

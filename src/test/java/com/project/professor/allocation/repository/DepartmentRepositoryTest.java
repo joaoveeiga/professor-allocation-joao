@@ -71,4 +71,22 @@ public class DepartmentRepositoryTest
 		//print
 		System.out.println(department);
 	}
+	
+	@Test
+	void save_update()
+	{
+		//Arrange
+		Department department = new Department();
+		department.setName("Qualiti");
+		department.setId(4L);
+
+		//act
+		if (!departmentRepository.findById(department.getId()).orElse(null).equals(null)) 
+		{
+			departmentRepository.findById(department.getId()).orElse(null).setName(department.getName());
+		}
+	
+		//print
+		System.out.println(departmentRepository.findById(department.getId()).orElse(null).getName());
+	}
 }

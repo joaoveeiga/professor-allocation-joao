@@ -145,4 +145,32 @@ public class AllocationRepositoryTest
 		//print
 		System.out.println(allocation);
 	}
+	
+	@Test
+	void update_save()
+	{
+		//arrange
+		Date endHour = new Date (79200000L);
+		Date startHour = new Date (68400000L);
+		Allocation allocation = new Allocation();
+		allocation.setCourse(courseRepository.findById(5L).orElse(null));
+		allocation.setDayOfWeek(DayOfWeek.MONDAY);
+		allocation.setEndHour(endHour);
+		allocation.setStartHour(startHour);
+		allocation.setId(1L);
+		allocation.setProfessor(professorRepository.findById(2L).orElse(null));
+		
+		//act
+		if(!allocationRepository.findById(allocation.getId()).orElse(null).equals(null))
+		{
+			allocationRepository.findById(allocation.getId()).orElse(null).setCourse(allocation.getCourse());
+			allocationRepository.findById(allocation.getId()).orElse(null).setDayOfWeek(allocation.getDayOfWeek());
+			allocationRepository.findById(allocation.getId()).orElse(null).setEndHour(allocation.getEndHour());
+			allocationRepository.findById(allocation.getId()).orElse(null).setStartHour(allocation.getStartHour());
+			allocationRepository.findById(allocation.getId()).orElse(null).setProfessor(allocation.getProfessor());
+		}
+		
+		//print
+		System.out.println("Novo professor: " + allocationRepository.findById(1L).orElse(null).getProfessor().getName());
+	}
 }

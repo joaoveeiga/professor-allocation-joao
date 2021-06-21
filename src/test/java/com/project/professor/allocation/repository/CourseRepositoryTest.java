@@ -11,6 +11,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.TestPropertySource;
 
 import com.project.professor.allocation.entity.Course;
+import com.project.professor.allocation.entity.Department;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
@@ -70,5 +71,23 @@ public class CourseRepositoryTest
 		//print
 		System.out.println(course);
 		
+	}
+	
+	@Test
+	void update_save()
+	{
+		//Arrange
+		Course course = new Course();
+		course.setName("Recode V");
+		course.setId(5L);
+
+		//act
+		if (!courseRepository.findById(course.getId()).orElse(null).equals(null)) 
+		{
+			courseRepository.findById(course.getId()).orElse(null).setName(course.getName());
+		}
+	
+		//print
+		System.out.println(courseRepository.findById(course.getId()).orElse(null).getName());
 	}
 }
