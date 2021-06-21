@@ -10,64 +10,50 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.TestPropertySource;
 
-import com.project.professor.allocation.entity.Professor;
+import com.project.professor.allocation.entity.Department;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
 @TestPropertySource(locations = "classpath:application.properties")
-public class ProfessorRepositoryTest {
-
+public class DepartmentRepositoryTest 
+{
 	@Autowired
-	private ProfessorRepository professorRepository;
+	private DepartmentRepository departmentRepository;
 	
 	@Test
-	public void findAll ()
+	void findAll()
 	{
 		//act
-		List<Professor> professors = professorRepository.findAll();
+		List<Department> departments = departmentRepository.findAll();
 		
 		//print
-		System.out.println(professors);
-	}
-	
-	@Test
-	void findById ()
-	{
-		//Arrange
-		Long id = 1L;
-		
-		//act
-		Professor professor = professorRepository.findById(id).orElse(null);
-
-		//Print
-		System.out.println(professor);
+		System.out.println(departments);
 	}
 	
 	@Test
 	void findByNameContainingIgnoreCase ()
 	{
 		//Arrange
-		String name = "B";
+		String partOfTheDepartmentName = "E";
 		
 		//act
-		List<Professor> professors = professorRepository.findByNameContainingIgnoreCase(name);
+		List<Department> departments = departmentRepository.findByNameContainingIgnoreCase(partOfTheDepartmentName);
 		
-		//Print
-		System.out.println(professors);
-		
+		//print
+		System.out.println(departments);
 	}
 	
 	@Test
-	void findByCpf ()
+	void findById()
 	{
 		//Arrange
-		String cpf = "1";
+		Long id = 3L;
 		
-		//Act
-		Professor professor = professorRepository.findByCpf(cpf).orElse(null);
+		//act
+		Department department = departmentRepository.findById(id).orElse(null);
 		
-		//Print
-		System.out.println(professor);
+		//print
+		System.out.println(department);
 	}
 }

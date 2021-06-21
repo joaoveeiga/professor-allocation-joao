@@ -1,0 +1,118 @@
+package com.project.professor.allocation.repository;
+
+import java.sql.Time;
+import java.time.DayOfWeek;
+import java.time.DayOfWeek;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.TestPropertySource;
+
+import com.project.professor.allocation.entity.Allocation;
+
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = Replace.NONE)
+@Rollback(false)
+@TestPropertySource(locations = "classpath:application.properties")
+public class AllocationRepositoryTest 
+{
+	@Autowired
+	private AllocationRepository allocationRepository;
+	
+	@Test
+	void findAll()
+	{
+		//act
+		List<Allocation> allocations = allocationRepository.findAll();
+		
+		//print
+		System.out.println(allocations);
+	}
+	
+	@Test
+	void findById ()
+	{
+		//arrange
+		Long id = 1L;
+		
+		//act
+		Allocation allocation = allocationRepository.findById(id).orElse(null);
+		
+		//print
+		System.out.println(allocation);
+	}
+	
+	@Test
+	void findByDayOfWeek() //esse teste não rodou com o nome da coluna, apenas com o nome da variável, pq??
+	{
+		//arrange
+		DayOfWeek dayOfWeek = DayOfWeek.SATURDAY;
+		
+		//act
+		List<Allocation> allocations = allocationRepository.findByDayOfWeek(dayOfWeek);
+		
+		//print
+		System.out.println(allocations);
+	}
+	
+	@Test
+	void findByStartHour () //Aqui tb não roda por pelo nome da coluna. Seria pq start e day são palavras reservadas??
+	{
+		//arrange
+		//Aqui fiquei em dúvida como seria o melhor arrange para startHour
+		//Qual o melhor objeto a ser criado aqui??
+		Time startHour = new Time (0, 0, 0);
+		
+		//act
+		List<Allocation> allocations = allocationRepository.findByStartHour(startHour);
+		
+		//print
+		System.out.println(allocations);
+	}
+	
+	@Test
+	void findByEndHour ()
+	{
+		//arrange
+		//Aqui fiquei em dúvida como seria o melhor arrange para startHour
+		//Qual o melhor objeto a ser criado aqui??
+		Time endHour = new Time (0, 0, 10);
+		
+		//act
+		List<Allocation> allocations = allocationRepository.findByEndHour(endHour);
+		
+		//print
+		System.out.println(allocations);
+	}
+	
+	@Test
+	void findByProfessor_id() //esse teste rodou com o nome da coluna.
+	{
+		//arrange
+		Long professor_id = 2L;
+		
+		//act
+		List<Allocation> allocations = allocationRepository.findByProfessor_id(professor_id);
+		
+		//print
+		System.out.println(allocations);
+	}
+	
+	@Test
+	void findByCourse_id() //esse teste tb rodou com o nome da coluna.
+	{
+		//arrange
+		Long course_id = 3L;
+		
+		//act
+		List<Allocation> allocations = allocationRepository.findByCourse_id(course_id);
+		
+		//print
+		System.out.println(allocations);
+	}
+}
