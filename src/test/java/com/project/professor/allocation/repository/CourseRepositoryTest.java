@@ -90,4 +90,18 @@ public class CourseRepositoryTest
 		//print
 		System.out.println(courseRepository.findById(course.getId()).orElse(null).getName());
 	}
+	
+	@Test
+	void deleteById()
+	{
+		Long id = 2L;
+		
+		courseRepository.deleteById(id);
+	}
+	
+	@Test
+	void deleteAll()
+	{
+		courseRepository.deleteAllInBatch();
+	}
 }

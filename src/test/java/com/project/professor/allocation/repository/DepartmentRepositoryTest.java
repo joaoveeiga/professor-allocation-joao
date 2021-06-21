@@ -89,4 +89,19 @@ public class DepartmentRepositoryTest
 		//print
 		System.out.println(departmentRepository.findById(department.getId()).orElse(null).getName());
 	}
+	
+	@Test
+	void deleteById()
+	{
+		Long id = 4L;
+		
+		departmentRepository.deleteById(id);
+	}
+	
+	@Test
+	void deleteAll()
+	{
+		departmentRepository.deleteAllInBatch();
+	}
+	
 }

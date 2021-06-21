@@ -173,4 +173,18 @@ public class AllocationRepositoryTest
 		//print
 		System.out.println("Novo professor: " + allocationRepository.findById(1L).orElse(null).getProfessor().getName());
 	}
+	
+	@Test
+	void deleteById()
+	{
+		Long id = 7L;
+		
+		allocationRepository.deleteById(id);
+	}
+	
+	@Test
+	void deleteAll()
+	{
+		allocationRepository.deleteAllInBatch();
+	}
 }

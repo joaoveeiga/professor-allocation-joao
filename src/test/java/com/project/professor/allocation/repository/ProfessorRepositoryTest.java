@@ -115,4 +115,18 @@ public class ProfessorRepositoryTest {
 		System.out.println("Nome: " + professorRepository.findById(2L).orElse(null).getName());
 		
 	}
+	
+	@Test
+	void deleteById()
+	{
+		Long id = 2L;
+		
+		professorRepository.deleteById(id);
+	}
+	
+	@Test
+	void deleteAll()
+	{
+		professorRepository.deleteAllInBatch();
+	}
 }
