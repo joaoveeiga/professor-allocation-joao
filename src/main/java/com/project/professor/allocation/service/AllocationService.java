@@ -60,7 +60,7 @@ public class AllocationService
 	
 	public Allocation createSave(Allocation professor)
 	{
-		if(!professor.equals(null))
+		if(professor != null)
 		{
 			professor.setId(null);
 			return save(professor);
@@ -70,7 +70,7 @@ public class AllocationService
 	
 	public Allocation updateSave(Allocation allocation)
 	{
-		if(!allocation.equals(null) && !allocationRepository.findById(allocation.getId()).equals(null))
+		if(allocation != null && allocationRepository.findById(allocation.getId()) != null)
 		{
 			return save(allocation);
 		}
@@ -94,7 +94,7 @@ public class AllocationService
 	
 	public void deleteById (Long id)
 	{
-		if (!id.equals(null) && !allocationRepository.findById(id).equals(null))
+		if (id != null && allocationRepository.findById(id) != null)
 		{
 			allocationRepository.deleteById(id);
 		}

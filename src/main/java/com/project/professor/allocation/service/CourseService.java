@@ -32,7 +32,7 @@ public class CourseService
 	
 	public List<Course> findAll (String name)
 	{
-		if (name.equals(null) || name.equals(""))
+		if (name == null || name.equals(""))
 		{
 			 return this.findAll();
 		}
@@ -44,7 +44,7 @@ public class CourseService
 	
 	public Course createSave (Course course)
 	{
-		if (!course.equals(null)) 
+		if (course != null) 
 		{
 			course.setId(null);
 			return save(course);
@@ -54,7 +54,7 @@ public class CourseService
 	
 	public Course updateSave (Course course)
 	{
-		if (!course.equals(null) && !courseRepository.findById(course.getId()).equals(null))
+		if (course != null && courseRepository.findById(course.getId()) != null)
 		{
  			return save(course);
 		}
@@ -69,7 +69,7 @@ public class CourseService
 	
 	public void deleteById (Long id)
 	{
-		if (!id.equals(null) && !courseRepository.findById(id).equals(null))
+		if (id != null && courseRepository.findById(id) != null)
 		{
 			courseRepository.deleteById(id);
 		}

@@ -32,7 +32,7 @@ public class DepartmentService
 	
 	public List<Department> findAll (String name)
 	{
-		if (name.equals(null) || name.equals(""))
+		if (name == null || name.equals(""))
 		{
 			 return this.findAll();
 		}
@@ -44,7 +44,7 @@ public class DepartmentService
 	
 	public Department createSave (Department department)
 	{
-		if (!department.equals(null)) 
+		if (department != null) 
 		{
 			department.setId(null);
 			return save(department);
@@ -54,7 +54,7 @@ public class DepartmentService
 	
 	public Department updateSave (Department department)
 	{
-		if (!department.equals(null) && !departmentRepository.findById(department.getId()).equals(null))
+		if (department != null && departmentRepository.findById(department.getId()) != null)
 		{
  			return save(department);
 		}
@@ -69,7 +69,7 @@ public class DepartmentService
 	
 	public void deleteById (Long id)
 	{
-		if (!id.equals(null) && !departmentRepository.findById(id).equals(null))
+		if (id != null && departmentRepository.findById(id) != null)
 		{
 			departmentRepository.deleteById(id);
 		}

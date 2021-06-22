@@ -45,7 +45,7 @@ public class ProfessorService
 	
 	public List<Professor> findAll (String name)
 	{
-		if (name.equals(null) || name.equals(""))
+		if (name==null || name.equals(""))
 		{
 			 return this.findAll();
 		}
@@ -57,7 +57,7 @@ public class ProfessorService
 	
 	public Professor createSave(Professor professor)
 	{
-		if(!professor.equals(null))
+		if(professor != null)
 		{
 			professor.setId(null);
 			return save(professor);
@@ -67,7 +67,7 @@ public class ProfessorService
 	
 	public Professor updateSave(Professor professor)
 	{
-		if(!professor.equals(null) && !professorRepository.findById(professor.getId()).equals(null))
+		if(professor != null && professorRepository.findById(professor.getId()) != null)
 		{
 			return save(professor);
 		}
@@ -87,7 +87,7 @@ public class ProfessorService
 	
 	public void deleteById (Long id)
 	{
-		if (!id.equals(null) && !professorRepository.findById(id).equals(null))
+		if (id != null && professorRepository.findById(id) != null)
 		{
 			professorRepository.deleteById(id);
 		}
