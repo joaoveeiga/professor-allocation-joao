@@ -161,6 +161,9 @@ public class AllocationRepositoryTest
 		allocation.setProfessor(professorRepository.findById(2L).orElse(null));
 		
 		//act
+		// Essa linha é perigosa !allocationRepository.findById(allocation.getId()).orElse(null).equals(null)
+		// O melhor é utilizar: allocationRepository.existsById(allocationRepository)
+		// Mesma coisa se aplica aos outros testes
 		if(!allocationRepository.findById(allocation.getId()).orElse(null).equals(null))
 		{
 			allocationRepository.findById(allocation.getId()).orElse(null).setCourse(allocation.getCourse());

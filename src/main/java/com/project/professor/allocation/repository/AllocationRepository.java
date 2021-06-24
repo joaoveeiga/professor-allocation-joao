@@ -13,7 +13,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AllocationRepository extends JpaRepository<Allocation, Long> 
 {
-	Optional<Allocation> findById(Long id);
+	// Esse método já existe CrudRepository
+	//Optional<Allocation> findById(Long id);
 	List<Allocation> findByDayOfWeek (DayOfWeek dayOfWeek);
 	List<Allocation> findByStartHour (Time startHour);
 	List<Allocation> findByEndHour (Time endHour);

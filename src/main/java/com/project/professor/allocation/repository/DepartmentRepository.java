@@ -12,5 +12,6 @@ import org.springframework.stereotype.Repository;
 public interface DepartmentRepository extends JpaRepository<Department, Long>
 {
 	List<Department> findByNameContainingIgnoreCase(String partOfDepartmentName);
-	Optional<Department> findById(Long id);
+	// Esse método já existe CrudRepository
+	//Optional<Department> findById(Long id);
 }
