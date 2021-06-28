@@ -67,7 +67,7 @@ public class ProfessorService
 	
 	public Professor updateSave(Professor professor)
 	{
-		if(professor != null && professorRepository.findById(professor.getId()) != null)
+		if(professor != null && professorRepository.existsById(professor.getId()))
 		{
 			return save(professor);
 		}
@@ -87,7 +87,7 @@ public class ProfessorService
 	
 	public void deleteById (Long id)
 	{
-		if (id != null && professorRepository.findById(id) != null)
+		if (id != null && professorRepository.existsById(id))
 		{
 			professorRepository.deleteById(id);
 		}

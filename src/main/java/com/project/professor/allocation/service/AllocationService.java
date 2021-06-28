@@ -70,10 +70,7 @@ public class AllocationService
 	
 	public Allocation updateSave(Allocation allocation)
 	{
-		// Essa linha está errada: allocationRepository.findById(allocation.getId()) != null
-		// Nunca que o resultado de findById vai ser null, por conta o Optional.
-		// Usa allocationRepository.existsById(allocation.getId()) e replica nas outras classes
-		if(allocation != null && allocationRepository.findById(allocation.getId()) != null)
+		if(allocation != null && allocationRepository.existsById(allocation.getId()))
 		{
 			return save(allocation);
 		}
@@ -97,8 +94,7 @@ public class AllocationService
 	
 	public void deleteById (Long id)
 	{
-		// Mesmo comentário do existsById
-		if (id != null && allocationRepository.findById(id) != null)
+		if (id != null && allocationRepository.existsById(id))
 		{
 			allocationRepository.deleteById(id);
 		}

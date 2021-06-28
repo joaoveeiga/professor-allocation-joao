@@ -54,7 +54,7 @@ public class DepartmentService
 	
 	public Department updateSave (Department department)
 	{
-		if (department != null && departmentRepository.findById(department.getId()) != null)
+		if (department != null && departmentRepository.existsById(department.getId()))
 		{
  			return save(department);
 		}
@@ -69,7 +69,7 @@ public class DepartmentService
 	
 	public void deleteById (Long id)
 	{
-		if (id != null && departmentRepository.findById(id) != null)
+		if (id != null && departmentRepository.existsById(id))
 		{
 			departmentRepository.deleteById(id);
 		}

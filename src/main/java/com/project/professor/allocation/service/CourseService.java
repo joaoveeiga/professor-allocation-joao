@@ -54,7 +54,7 @@ public class CourseService
 	
 	public Course updateSave (Course course)
 	{
-		if (course != null && courseRepository.findById(course.getId()) != null)
+		if (course != null && courseRepository.existsById(course.getId()))
 		{
  			return save(course);
 		}
@@ -69,7 +69,7 @@ public class CourseService
 	
 	public void deleteById (Long id)
 	{
-		if (id != null && courseRepository.findById(id) != null)
+		if (id != null && courseRepository.existsById(id))
 		{
 			courseRepository.deleteById(id);
 		}
