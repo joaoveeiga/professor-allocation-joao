@@ -58,12 +58,12 @@ public class AllocationService
 		return allocationRepository.findByProfessor_id(professorId);
 	}
 	
-	public Allocation createSave(Allocation professor)
+	public Allocation createSave(Allocation allocation)
 	{
-		if(professor != null)
+		if(allocation != null)
 		{
-			professor.setId(null);
-			return save(professor);
+			allocation.setId(null);
+			return save(allocation);
 		}
 		return null;
 	}

@@ -1,6 +1,7 @@
 package com.project.professor.allocation.service;
 
 
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
@@ -75,7 +76,7 @@ public class AllocationServiceIntegrationTest
 	{
 		Long id = 23L;
 		
-		System.out.println(professorService.findById(id));
+		System.out.println(allocationService.findById(id));
 	}
 	
 	@Test
@@ -119,11 +120,45 @@ public class AllocationServiceIntegrationTest
 	@Test
 	public void findByStartHour () throws ParseException
 	{
+		Time startHour = new Time(19, 0, 0);
+		
+		List<Allocation> allocations = allocationService.findByStartHour(startHour);
+		
+		allocations.forEach(System.out::println);
 	}
 	
 	@Test
 	public void findByEndHour () throws ParseException
 	{
+		Time endHour = new Time(22, 0, 0);
+		
+		List<Allocation> allocations = allocationService.findByStartHour(endHour);
+		
+		allocations.forEach(System.out::println);
+	}
+	
+	@Test
+	public void findByProfessor_id ()
+	{
+		Long professorId = 15L;
+		
+		List<Allocation> allocations = allocationService.findByProfessor_id(professorId);
+		
+		allocations.forEach(System.out::println);
+	}
+	
+	@Test
+	public void deleteById ()
+	{
+		Allocation allocation = allocationService.findById(23L);
+		if (allocation != null)
+			allocationService.deleteById(allocation.getId());
+	}
+	
+	@Test
+	public void deleteAll ()
+	{
+		allocationService.deleteAll();
 	}
 	
 }
