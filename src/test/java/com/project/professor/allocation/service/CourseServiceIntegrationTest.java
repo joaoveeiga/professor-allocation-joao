@@ -19,9 +19,17 @@ public class CourseServiceIntegrationTest
 	@Test
 	public void createSave ()
 	{
-		Course course = new Course(null, "Backend", null);
+		Course backend = new Course(null, "Backend", null);
+		Course logica = new Course(null, "Lógica", null);
+		Course banco = new Course(null, "Banco de Dados", null);
+		Course prototipacao = new Course(null, "Prototipação de Baixa Fidelidade", null);
+		Course poo = new Course(null, "Programação Orientada a Objeto", null);
 		
-		course = courseService.createSave(course);
+		backend = courseService.createSave(backend);
+		logica = courseService.createSave(logica);
+		banco = courseService.createSave(banco);
+		prototipacao = courseService.createSave(prototipacao);
+		poo = courseService.createSave(poo);
 	}
 	
 	@Test

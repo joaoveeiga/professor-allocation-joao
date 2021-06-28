@@ -20,7 +20,7 @@ public class ProfessorServiceIntegrationTest
 	@Test
 	public void createSave()
 	{
-		Department department = new Department(7L, null, null);
+		Department department = new Department(8L, null, null);
 		
 		Professor matheus = new Professor(null, "Matheus", "0", department, null);
 		Professor amirton = new Professor(null, "Amirton", "1", department, null);
