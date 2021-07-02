@@ -60,11 +60,47 @@ public class AllocationController
 			return new ResponseEntity<>(allocation, HttpStatus.OK);
 	}
 	
-	@ApiOperation (value = "Read an allocation by start hour.")
+	@ApiOperation (value = "Read an allocation by professor id.")
+	@ApiResponses 
+	({
+		@ApiResponse (code = 200, message = "OK!"),
+		@ApiResponse (code = 404, message = "Not found!")
+	})
+	@GetMapping (path = "/professor/{professor_id}")
+	@ResponseStatus (HttpStatus.OK)
+	public ResponseEntity<List<Allocation>> findByProfessor_id (@PathVariable(name = "professor_id") Long id)
+	{
+		List<Allocation> allocations = allocationService.findByProfessor_id(id);
+		
+		if (allocations == null)
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		else
+			return new ResponseEntity<>(allocations, HttpStatus.OK);
+	}
+	
+	@ApiOperation (value = "Read an allocation by course id.")
+	@ApiResponses 
+	({
+		@ApiResponse (code = 200, message = "OK!"),
+		@ApiResponse (code = 404, message = "Not found!")
+	})
+	@GetMapping (path = "/course/{course_id}")
+	@ResponseStatus (HttpStatus.OK)
+	public ResponseEntity<List<Allocation>> findByCourse_id (@PathVariable(name = "course_id") Long id)
+	{
+		List<Allocation> allocations = allocationService.findByCourse_id(id);
+		
+		if (allocations.isEmpty())
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		else
+			return new ResponseEntity<>(allocations, HttpStatus.OK);
+	}
+	
+	/*@ApiOperation (value = "Read an allocation by start hour.")
 	@ApiResponse (code = 200, message = "OK")
 	@GetMapping (path = "/{startHour}")
 	@ResponseStatus (HttpStatus.OK)
-	public ResponseEntity<List<Allocation>> findByStartHour (@PathVariable (name = "startHour") Date startHour)
+	public ResponseEntity<List<Allocation>> findByStartHour (@PathVariable(name = "startHour", required = false) Date startHour)
 	{
 		if (startHour == null)
 			return new ResponseEntity<>(allocationService.findAll(), HttpStatus.OK);
@@ -76,13 +112,13 @@ public class AllocationController
 	@ApiResponse (code = 200, message = "OK")
 	@GetMapping (path = "/{endHour}")
 	@ResponseStatus (HttpStatus.OK)
-	public ResponseEntity<List<Allocation>> findByEndHour (@PathVariable (name = "endHour") Date endHour)
+	public ResponseEntity<List<Allocation>> findByEndHour (@PathVariable(name = "endHour", required = true) Date endHour)
 	{
 		if (endHour == null)
 			return new ResponseEntity<>(allocationService.findAll(), HttpStatus.OK);
 		else
 			return new ResponseEntity<>(allocationService.findByStartHour(endHour), HttpStatus.OK);
-	}
+	}*/
 	
 	@ApiOperation (value = "Create an allocation.")
 	@ApiResponses 
