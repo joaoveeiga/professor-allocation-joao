@@ -48,7 +48,7 @@ public class ProfessorServiceIntegrationTest
 	@Test
 	public void findAll ()
 	{
-		List<Professor> professors = professorService.findAll();
+		List<Professor> professors = professorService.findAll(null);
 		
 		professors.forEach(System.out::println);
 	}
@@ -58,7 +58,7 @@ public class ProfessorServiceIntegrationTest
 	{
 		String name = "a";
 		
-		List<Professor> professors = professorService.findByName(name);
+		List<Professor> professors = professorService.findAll(name);
 		
 		System.out.println("Professores os quais possuem a letra 'a' no nome: ");
 		professors.forEach(System.out::println);
@@ -66,7 +66,7 @@ public class ProfessorServiceIntegrationTest
 		name = "e";
 		System.out.println();
 		System.out.println("Professores os quais possuem a letra 'e' no nome: ");
-		professors = professorService.findByName(name);
+		professors = professorService.findAll(name);
 		professors.forEach(System.out::println);
 	}
 	

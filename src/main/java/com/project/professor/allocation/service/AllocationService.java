@@ -1,7 +1,7 @@
 package com.project.professor.allocation.service;
 
-import java.sql.Time;
 import java.time.DayOfWeek;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -42,14 +42,13 @@ public class AllocationService
 		return allocationRepository.findByDayOfWeek(dayOfWeek);	
 	}
 	
-	public List<Allocation> findByEndHour (Time endHour)
+	public List<Allocation> findByEndHour (Date endHour)
 	{
 		return allocationRepository.findByEndHour(endHour);	
 	}
 	
-	public List<Allocation> findByStartHour (Time startHour)
+	public List<Allocation> findByStartHour (Date startHour)
 	{
-		//aqui percebi que só era necessário findByHour...
 		return allocationRepository.findByStartHour(startHour);	
 	}
 	

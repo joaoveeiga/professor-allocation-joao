@@ -23,14 +23,16 @@ public class ProfessorService
 		return professorRepository.findById(id).orElse(null);
 	}
 	
-	public List<Professor> findAll()
+	public List<Professor> findAll (String name)
 	{
-		return professorRepository.findAll();
-	}
-	
-	public List<Professor> findByName (String name)
-	{
-		return professorRepository.findByNameContainingIgnoreCase(name);
+		if (name == null) 
+		{
+			return professorRepository.findAll();
+		}
+		else
+		{
+			return professorRepository.findByNameContainingIgnoreCase(name);
+		}
 	}
 	
 	public Professor findByCpf (String cpf)
@@ -41,18 +43,6 @@ public class ProfessorService
 	public List<Professor> findByDepartmentId (Long departmentId)
 	{
 		return professorRepository.findByDepartmentId(departmentId);
-	}
-	
-	public List<Professor> findAll (String name)
-	{
-		if (name==null || name.equals(""))
-		{
-			 return this.findAll();
-		}
-		else
-		{
-			return this.findByName(name);
-		}
 	}
 	
 	public Professor createSave(Professor professor)
