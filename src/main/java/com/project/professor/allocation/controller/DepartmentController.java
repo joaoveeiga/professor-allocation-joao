@@ -70,8 +70,9 @@ public class DepartmentController
 	@ResponseStatus (HttpStatus.CREATED)
 	public ResponseEntity<Department> createSave (@RequestBody Department department)
 	{
+		// Onde está o TRY para tratar o bad request?
 		department = departmentService.createSave(department);
-		
+
 		if (department == null)
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		else
@@ -90,6 +91,7 @@ public class DepartmentController
 	public ResponseEntity<Department> updateSave (@PathVariable (name = "department_id") Long id, @RequestBody Department department)
 	{
 		department.setId(id);
+		// Onde está o TRY para tratar o bad request?
 		department = departmentService.updateSave(department);
 		if (department == null)
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
