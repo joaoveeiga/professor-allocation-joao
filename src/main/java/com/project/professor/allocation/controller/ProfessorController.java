@@ -97,6 +97,7 @@ public class ProfessorController
 	public ResponseEntity<Professor> update (@PathVariable(name = "professor_id") Long id, @RequestBody Professor professor)
 	{
 		professor.setId(id);
+		// Essa parte era para ficar dentro do TRY, pois ela é quem pode gerar a exceção.
 		Professor newProfessor = professorService.updateSave(professor);
 		try 
 		{
