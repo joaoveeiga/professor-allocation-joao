@@ -89,7 +89,8 @@ public class ProfessorController
 	@ApiResponses 
 	({
 		@ApiResponse (code = 200, message = "OK!"),
-		@ApiResponse (code = 404, message = "Not found!")
+		@ApiResponse (code = 404, message = "Not found!"),
+		@ApiResponse (code = 500, message = "Bad request!")
 	})
 	@PutMapping(path = "/{professor_id}")
 	@ResponseStatus (HttpStatus.OK)
