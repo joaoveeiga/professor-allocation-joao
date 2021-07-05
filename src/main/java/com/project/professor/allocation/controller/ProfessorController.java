@@ -82,7 +82,6 @@ public class ProfessorController
 		{
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		
 	}
 	
 	@ApiOperation (value = "Update a pre-existing professor.")
@@ -96,11 +95,10 @@ public class ProfessorController
 	@ResponseStatus (HttpStatus.OK)
 	public ResponseEntity<Professor> update (@PathVariable(name = "professor_id") Long id, @RequestBody Professor professor)
 	{
-		professor.setId(id);
-		// Essa parte era para ficar dentro do TRY, pois ela é quem pode gerar a exceção.
-		Professor newProfessor = professorService.updateSave(professor);
 		try 
 		{
+			professor.setId(id);
+			Professor newProfessor = professorService.updateSave(professor);
 			if (newProfessor == null)
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			else

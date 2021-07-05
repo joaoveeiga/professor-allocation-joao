@@ -70,30 +70,40 @@ public class CourseController
 	@ResponseStatus (HttpStatus.CREATED)
 	public ResponseEntity<Course> createSave (@RequestBody Course course)
 	{
-		course = courseService.createSave(course);
-		
-		if (course == null)
+		try
+		{
+			return new ResponseEntity<Course> (courseService.createSave(course), HttpStatus.CREATED);
+		}
+		catch (Exception e)
+		{
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		else
-			return new ResponseEntity<>(course,HttpStatus.CREATED);
+		}
 	}
 	
 	@ApiOperation (value = "Update a pre-existing course.")
 	@ApiResponses 
 	({
 		@ApiResponse (code = 200, message = "OK!"),
-		@ApiResponse (code = 404, message = "Not found!")
+		@ApiResponse (code = 404, message = "Not found!"),
+		@ApiResponse (code = 500, message = "Bad request!")
 	})
-	@PutMapping (path = "/{course_id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(path = "/{course_id}")
 	@ResponseStatus (HttpStatus.OK)
-	public ResponseEntity<Course> updateSave (@PathVariable (name = "course_id") Long id, @RequestBody Course course)
+	public ResponseEntity<Course> updateSave (@PathVariable(name = "course_id") Long id, @RequestBody Course course)
 	{
-		course.setId(id);
-		course = courseService.updateSave(course);
-		if (course == null)
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		else
-			return new ResponseEntity<>(course, HttpStatus.OK);
+		try 
+		{
+			course.setId(id);
+			Course newCourse = courseService.updateSave(course);
+			if (newCourse == null)
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			else
+				return new ResponseEntity<>(newCourse, HttpStatus.OK);
+		}
+		catch (Exception e)
+		{
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	@ApiOperation (value = "Delete a course by id.")

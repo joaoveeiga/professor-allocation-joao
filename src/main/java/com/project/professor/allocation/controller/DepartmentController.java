@@ -70,13 +70,14 @@ public class DepartmentController
 	@ResponseStatus (HttpStatus.CREATED)
 	public ResponseEntity<Department> createSave (@RequestBody Department department)
 	{
-		// Onde está o TRY para tratar o bad request?
-		department = departmentService.createSave(department);
-
-		if (department == null)
+		try
+		{
+			return new ResponseEntity<Department> (departmentService.createSave(department), HttpStatus.CREATED);
+		}
+		catch (Exception e)
+		{
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		else
-			return new ResponseEntity<>(department,HttpStatus.CREATED);
+		}
 	}
 	
 	
@@ -84,19 +85,26 @@ public class DepartmentController
 	@ApiResponses 
 	({
 		@ApiResponse (code = 200, message = "OK!"),
-		@ApiResponse (code = 404, message = "Not found!")
+		@ApiResponse (code = 404, message = "Not found!"),
+		@ApiResponse (code = 500, message = "Bad request!")
 	})
-	@PutMapping (path = "/{department_id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(path = "/{department_id}")
 	@ResponseStatus (HttpStatus.OK)
-	public ResponseEntity<Department> updateSave (@PathVariable (name = "department_id") Long id, @RequestBody Department department)
+	public ResponseEntity<Department> updateSave (@PathVariable(name = "department_id") Long id, @RequestBody Department department)
 	{
-		department.setId(id);
-		// Onde está o TRY para tratar o bad request?
-		department = departmentService.updateSave(department);
-		if (department == null)
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		else
-			return new ResponseEntity<>(department, HttpStatus.OK);
+		try 
+		{
+			department.setId(id);
+			Department newDepartment = departmentService.updateSave(department);
+			if (newDepartment == null)
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			else
+				return new ResponseEntity<>(newDepartment, HttpStatus.OK);
+		}
+		catch (Exception e)
+		{
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	@ApiOperation (value = "Delete a department by id.")

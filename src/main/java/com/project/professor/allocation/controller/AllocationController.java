@@ -1,7 +1,6 @@
 package com.project.professor.allocation.controller;
 
 import java.util.List;
-import java.util.Date;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -130,30 +129,40 @@ public class AllocationController
 	@ResponseStatus (HttpStatus.CREATED)
 	public ResponseEntity<Allocation> createSave (@RequestBody Allocation allocation)
 	{
-		allocation = allocationService.createSave(allocation);
-		
-		if (allocation == null)
+		try
+		{
+			return new ResponseEntity<Allocation> (allocationService.createSave(allocation), HttpStatus.CREATED);
+		}
+		catch (Exception e)
+		{
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		else
-			return new ResponseEntity<>(allocation,HttpStatus.CREATED);
+		}
 	}
 	
 	@ApiOperation (value = "Update a pre-existing allocation.")
 	@ApiResponses 
 	({
 		@ApiResponse (code = 200, message = "OK!"),
-		@ApiResponse (code = 404, message = "Not found!")
+		@ApiResponse (code = 404, message = "Not found!"),
+		@ApiResponse (code = 500, message = "Bad request!")
 	})
-	@PutMapping (path = "/{allocation_id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(path = "/{allocation_id}")
 	@ResponseStatus (HttpStatus.OK)
-	public ResponseEntity<Allocation> updateSave (@PathVariable (name = "allocation_id") Long id, @RequestBody Allocation allocation)
+	public ResponseEntity<Allocation> updateSave (@PathVariable(name = "allocation_id") Long id, @RequestBody Allocation allocation)
 	{
-		allocation.setId(id);
-		allocation = allocationService.updateSave(allocation);
-		if (allocation == null)
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		else
-			return new ResponseEntity<>(allocation, HttpStatus.OK);
+		try 
+		{
+			allocation.setId(id);
+			Allocation newAllocation = allocationService.updateSave(allocation);
+			if (newAllocation == null)
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			else
+				return new ResponseEntity<>(newAllocation, HttpStatus.OK);
+		}
+		catch (Exception e)
+		{
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	@ApiOperation (value = "Delete an allocation by id.")
